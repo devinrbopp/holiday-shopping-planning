@@ -12,6 +12,8 @@ const isLoggedIn = require('./middleware/isLoggedIn')
 app.set('view engine', 'ejs')
 app.use(ejsLayouts)
 
+// static doc middleware ADD LATER
+
 // body parser middelware
 app.use(express.urlencoded({extended:false}))
 
