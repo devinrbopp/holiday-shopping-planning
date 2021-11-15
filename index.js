@@ -12,7 +12,8 @@ const isLoggedIn = require('./middleware/isLoggedIn')
 app.set('view engine', 'ejs')
 app.use(ejsLayouts)
 
-// static doc middleware ADD LATER
+// static doc middleware
+app.use(express.static(__dirname+'/public'))
 
 // body parser middelware
 app.use(express.urlencoded({extended:false}))
@@ -42,6 +43,7 @@ app.use((req, res, next) => {
 // controllers middleware 
 app.use('/auth', require('./controllers/auth'))
 app.use('/recipients', require('./controllers/recipients'))
+app.use('/gifts', require('./controllers/gifts'))
 
 
 // home route

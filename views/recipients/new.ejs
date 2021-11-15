@@ -1,1 +1,21 @@
 <h1>Add a recipient</h1>
+<form action="/recipients" method="POST">
+    <label for="recipientFirstName">First Name</label>
+    <input type="text" id="recipientFirstName" name="firstName">
+
+    <label for="recipientLastName">Last Name</label>
+    <input type="text" id="recipientLastName" name="lastName">
+    
+    <label for="relationship">Relationship</label>
+    <select name="relationship" id="relationship">
+        <option value="" disabled selected>Choose...</option>
+        <option value="parent">Parent</option>
+        <option value="grandparent">Grandparent</option>
+        <option value="sibling">Sibling</option>
+        <option value="pibling">Pibling</option>
+        <option value="nibling">Nibling</option>
+        <option value="partner">Partner/Spouse</option>
+    </select>
+
+    <input type="submit" value="Add Recipient">
+</form>
