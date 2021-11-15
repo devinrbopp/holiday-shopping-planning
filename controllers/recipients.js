@@ -6,8 +6,8 @@ const isLoggedIn = require('../middleware/isLoggedIn')
 
 
 // GET display all recipients
-router.get('/', (req,res) => {
-    db.recipient.findAll()
+router.get('/', isLoggedIn, (req,res) => {
+    db.recipient.findAll({where: {userId: req.user.dataValues.id}})
     .then((recipients) => {
         res.render('recipients/index', {recipients: recipients })
     }).catch(error => {
