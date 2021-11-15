@@ -41,6 +41,7 @@ app.use((req, res, next) => {
 
 // controllers middleware 
 app.use('/auth', require('./controllers/auth'))
+app.use('/recipients', require('./controllers/recipients'))
 
 
 // home route
@@ -56,5 +57,5 @@ app.get('/profile', isLoggedIn, (req, res)=>{
 
 app.listen(3000, ()=>{
     console.log(`process.env.SUPER_SECRET_SECRET ${process.env.SUPER_SECRET_SECRET}`)
-    console.log("auth_practice running on port 3000")
+    console.log("holiday shopping running on port 3000 🎁")
 })
