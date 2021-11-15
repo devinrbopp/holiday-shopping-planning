@@ -1,22 +1,34 @@
 const express = require('express')
 const router = express.Router()
 const db = require('../models')
+const isLoggedIn = require('../middleware/isLoggedIn')
 
 
+
+// GET display all recipients
 router.get('/', (req,res) => {
-    res.render('recipients/recipients')
+    db.recipient.findAll()
+    .then((recipients) => {
+        res.render('recipients/index', {recipients: recipients })
+    }).catch(error => {
+        console.error()
+    })
+    // res.render('recipients/recipients')
 })
 
-router.get('/new', (req,res) => {
+// GET create new recipient form
+router.get('/new', isLoggedIn, (req,res) => {
     res.render('recipients/new')
 })
 
-router.post('/', (req, res) => {
+// POST create new recipient form
+router.post('/', isLoggedIn, (req, res) => {
     console.log(req.body)
     db.recipient.create({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
-        relationship: req.body.relationship
+        relationship: req.body.relationship,
+        userId: req.body.userId
     })
     .then((recipient) => {
         res.redirect('/recipients')
