@@ -2,3 +2,6 @@
 <% recipients.forEach( r => { %>
     <p><%= r.firstName %> <%= r.lastName %><br><small><%= r.relationship %></small></p>
 <% }) %> 
+<form action="/recipients/new">
+    <input type="submit" value="Add New">
+</form>

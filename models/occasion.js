@@ -17,7 +17,8 @@ module.exports = (sequelize, DataTypes) => {
   };
   occasion.init({
     name: DataTypes.STRING,
-    date: DataTypes.DATE
+    month: DataTypes.INTEGER,
+    day: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'occasion',
