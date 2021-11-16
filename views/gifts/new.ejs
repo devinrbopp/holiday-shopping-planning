@@ -1,4 +1,6 @@
-<h1>Search Etsy</h1>
+<h4><%= result.title %></h4>
 <form action="/gifts" method="POST">
-    
+    <input type="text" name="name" value="<%= result.title %>" hidden>
+    <input type="text" name="store" value="Etsy" hidden>
+    <input type="submit" value="Add to Gifts">
 </form>
