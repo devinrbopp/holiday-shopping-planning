@@ -1,7 +1,21 @@
 <h1>Recipients</h1>
 <% recipients.forEach( r => { %>
-    <p><%= r.firstName %> <%= r.lastName %><br><small><%= r.relationship %></small></p>
+    <a class="btn modal-trigger" href="#modal<%= r.id %>"><%= r.firstName %> <%= r.lastName %></a><br><small><%= r.relationship %></small><br>
+
+    <div id="modal<%= r.id %>" class="modal">
+        <div class="modal-content">
+            <h4>modal</h4>
+            <p>text in the modal</p>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close btn-flat">Close</a>
+        </div>
+    </div>
+
 <% }) %> 
+
+
+<br>
 <form action="/recipients/new">
     <input type="submit" value="Add New">
 </form>
