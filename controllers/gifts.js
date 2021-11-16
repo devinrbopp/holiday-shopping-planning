@@ -5,7 +5,13 @@ const axios = require('axios')
 
 // index gift display
 router.get('/', (req,res) => {
-    res.render('gifts/index')
+    db.gift.findAll()
+    .then( gifts => {
+        res.render('gifts/index', {gifts})
+    })
+    .catch(error => {
+        console.error
+    })
 })
 
 // search
