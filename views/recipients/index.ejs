@@ -1,24 +1,31 @@
 <h1>Recipients</h1>
-<% recipients.forEach( r => { %>
-    <a class="btn modal-trigger" href="#modal<%= r.id %>"><%= r.firstName %> <%= r.lastName %></a><br><small><%= r.relationship %></small><br>
+<% console.log('RECIPIENTS HERE:', recipients) %>
+<% if (recipients.length == 0) { %>
+    <h3>
+        Add your first recipients!!!
+    </h3>
+<% } else { %>
+    <% recipients.forEach( r => { %>
+        <a class="btn modal-trigger" href="#modal<%= r.id %>"><%= r.firstName %> <%= r.lastName %></a><br><small><%= r.relationship %></small><br>
 
-    <div id="modal<%= r.id %>" class="modal">
-        <div class="modal-content">
-            <h4>modal</h4>
-            <p>text in the modal</p>
+        <div id="modal<%= r.id %>" class="modal">
+            <div class="modal-content">
+                <h4>modal</h4>
+                <p>text in the modal</p>
+            </div>
+            <div class="modal-footer">
+                <form action="/recipients/<%= r.id %>?_method=DELETE" method="POST">
+                    <button class="modal-close btn" type="submit">Delete</button>
+                    <a href="#!" class="modal-close gray btn">Close</a>
+                </form>
+            </div>
         </div>
-        <div class="modal-footer">
-            <form action="/recipients/<%= r.id %>?_method=DELETE" method="POST">
-                <button class="modal-close btn" type="submit">Delete</button>
-            </form>
-            <a href="#!" class="modal-close gray btn">Close</a>
-        </div>
-    </div>
 
-<% }) %> 
+    <% }) %> 
+<% } %>
 
 
 <br>
 <form action="/recipients/new">
-    <input type="submit" value="Add New">
+    <input class="btn blue" type="submit" value="Add New">
 </form>
