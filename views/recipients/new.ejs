@@ -14,10 +14,17 @@
         <option value="sibling">Sibling</option>
         <option value="pibling">Pibling</option>
         <option value="nibling">Nibling</option>
-        <option value="partner">Partner/Spouse</option>
+        <option value="partner/spouse">Partner/Spouse</option>
+        <option value="friend">Friend</option>
     </select>
 
     <input type="integer" name="userId" value="<%= currentUser.id %>" hidden>
-
+    <label>
+        <input type="checkbox" class="filled-in" name="interest1"><span>Interest 1</span>
+    </label>
+    <label>
+        <input type="checkbox" class="filled-in" name="interest2"><span>Interest 2</span>
+    </label>
+    <br>
     <input type="submit" value="Add Recipient">
 </form>
