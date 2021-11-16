@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const db = require('../models')
 const isLoggedIn = require('../middleware/isLoggedIn')
-
+const methodOverride = require('method-override')
 
 
 // GET display all recipients
@@ -19,6 +19,15 @@ router.get('/', isLoggedIn, (req,res) => {
 // GET create new recipient form
 router.get('/new', isLoggedIn, (req,res) => {
     res.render('recipients/new')
+})
+
+// GET show individual recipient details
+router.get('/:id', (req, res) => {
+    // get recipients
+    db.recipient.findOne({where: {id: req.params.id}})
+    .then( recipient => {
+        res.render('recipients/show', {recipient: recipient})
+    })
 })
 
 // POST create new recipient form
