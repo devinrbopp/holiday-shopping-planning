@@ -1,12 +1,16 @@
 <h1>Search</h1>
-<% results.forEach(r => { %>
-    <div class="card blue-grey">
-        <div class="card-content white-text">
-            <span class="card-title"><%= r.title %></span>
+<div class="row">
+    <% results.forEach(r => { %>
+        <div class="col l6 m12 s12">
+            <div class="card blue-grey medium">
+                <div class="card-content white-text">
+                    <span class="card-title"><%= r.title %></span>
+                </div>
+                <div class="card-action">
+                    <a href="<%= r.url %>" target="_blank">View on Etsy</a>
+                    <a href="/gifts/etsy/<%= r.listing_id %>">Add to Gift List</a>
+                </div>
+            </div>
         </div>
-        <div class="card-action">
-            <a href="<%= r.url %>" target="_blank">View on Etsy</a>
-            <a href="/gifts/etsy/<%= r.listing_id %>">Add to Gift List</a>
-        </div>
-    </div>
-<% }) %>
+    <% }) %>
+</div>

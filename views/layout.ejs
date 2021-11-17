@@ -9,23 +9,29 @@
 </head>
 <body>
     <header>
-        <h1>Holiday Shopping Planner</h1>
-        <nav>
-            <ul>
-              <% if (!currentUser) { %>
-                <li><a href="/auth/signup">Signup</a></li>
-                <li><a href="/auth/login">Login</a></li>
-              <% } else { %>
-                <li><a href="/auth/logout">Logout</a></li>
-                <li><a href="/profile"><%= currentUser.name %>'s Profile</a></li>
-                <li><a href="/recipients">Recipients</a></li>
-                <li><a href="/gifts">Gifts</a></li>
-              <% } %>
-            </ul>
+        <div class="container">
+          <h1>Holiday Shopping Planner</h1>
+        </div>
+        <nav class="teal darken-2">
+            <div class="container">
+              <ul>
+                <% if (!currentUser) { %>
+                  <li><a href="/auth/signup">Signup</a></li>
+                  <li><a href="/auth/login">Login</a></li>
+                <% } else { %>
+                  <li><a href="/auth/logout">Logout</a></li>
+                  <li><a href="/profile"><%= currentUser.name %>'s Profile</a></li>
+                  <li><a href="/recipients">Recipients</a></li>
+                  <li><a href="/gifts">Gifts</a></li>
+                <% } %>
+              </ul>
+            </div>
           </nav>
     </header>
-    <%- include('partials/alerts') %>
-    <%- body %> 
+    <div class="container">
+      <%- include('partials/alerts') %>
+      <%- body %> 
+    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="/js/script.js"></script>
 </body>

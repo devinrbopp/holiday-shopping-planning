@@ -19,7 +19,7 @@ router.get('/', isLoggedIn, (req,res) => {
     })
 })
 
-// search
+// search results display
 router.get('/results', isLoggedIn, (req, res) => {
     // pull in search query from form HERE and assign to variable
     let keyword = req.query.search
