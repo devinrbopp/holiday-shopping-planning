@@ -6,15 +6,11 @@ const axios = require('axios')
 
 // index gift display
 router.get('/', isLoggedIn, (req,res) => {
-    // db.user.findAll({
-        //     WHERE RECIPIENT ID BELONGS TO USERID OF CURRENTLY LOGGED IN USER, gonna need to use left join
-        //     SELECT g.name FROM gifts g INNER JOIN recipients r ON g."recipientId"=r.id INNER JOIN users u ON r."userId"=u.id WHERE u.id=1;
-        // })
-    db.gift.findAll()
-    .then( gifts => {
-        res.render('gifts/index', {gifts})
+    db.sequelize.query(`SELECT g.name FROM gifts g INNER JOIN recipients r ON g."recipientId"=r.id INNER JOIN users u ON r."userId"=u.id WHERE u.id=${req.user.dataValues.id}`)
+    .then( results => {
+        res.render('gifts/index', {gifts: results[0]})
     })
-    .catch(error => {
+    .catch( error => {
         console.error
     })
 })
