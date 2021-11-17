@@ -24,7 +24,6 @@ router.get('/new', isLoggedIn, (req,res) => {
 router.delete('/:id', (req, res) => {
     db.recipient.destroy({where: {id: req.params.id}})
     .then( deletedRecipient => {
-        console.log('you deleted', deletedRecipient)
         res.redirect('/recipients')
     })
     .catch(error=> {

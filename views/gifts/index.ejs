@@ -1,4 +1,12 @@
+<% console.log('HERE ARE THE GIFTS:\n',gifts)%>
 <h1>Gifts</h1>
+<h3>Find new gifts on Etsy:</h3>
+<form action="/gifts/results">
+    <label for="search">Keywords</label>
+    <input type="text" id="search" name="search">
+    <input type="submit" value="Search">
+</form>
+
 <% gifts.forEach(g => { %>
     <h4><%= g.name %></h4>
     <h6><%= g.firstName %> <%= g.lastName %></h6>

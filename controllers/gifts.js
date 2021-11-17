@@ -6,13 +6,12 @@ const axios = require('axios')
 
 // index gift display
 router.get('/', isLoggedIn, (req,res) => {
-    db.sequelize.query(`SELECT g.name, r."firstName", r."lastName"
+    db.sequelize.query(`SELECT g.id, g.name, r."firstName", r."lastName"
     FROM gifts g 
     INNER JOIN recipients r ON g."recipientId"=r.id 
     INNER JOIN users u ON r."userId"=u.id 
     WHERE u.id=${req.user.dataValues.id}`)
     .then( results => {
-        console.log('RESULTS HERE 🎁\n', results)
         res.render('gifts/index', {gifts: results[0]})
     })
     .catch( error => {
@@ -23,12 +22,10 @@ router.get('/', isLoggedIn, (req,res) => {
 // search
 router.get('/results', isLoggedIn, (req, res) => {
     // pull in search query from form HERE and assign to variable
-    let keyword = 'cats'
-
+    let keyword = req.query.search
     // axios request
     axios.get(`https://openapi.etsy.com/v3/application/listings/active?client_id=${process.env.ETSY_API_KEY}&keywords=${keyword}`)
     .then(apiResults => {
-        console.log(apiResults.data.results)
         res.render('gifts/results', {results: apiResults.data.results})
     })
     .catch(error => {
@@ -38,13 +35,11 @@ router.get('/results', isLoggedIn, (req, res) => {
 
 // POST add a gift
 router.post('/', isLoggedIn, (req, res) => {
-    
-    console.log('req.body!!!!!!!!!!!', req.body)
     db.gift.create({
-        name: req.body.name,
-        store: req.body.store,
-        isPurchased: 'false',
-        recipientId: req.body.recipientId
+    name: req.body.name,
+    store: req.body.store,
+    isPurchased: 'false',
+    recipientId: req.body.recipientId
     })
     .then( gift => {
         res.redirect('/gifts')
@@ -80,19 +75,6 @@ router.put('/:id', isLoggedIn, (req, res) => {
     })
 })
 
-// // show a etsy product, and have the option to add it to a recipient
-// router.get('/etsy/:etsyId', (req, res) => {
-//     let etsyId = req.params.etsyId
-//     // axios query
-//     axios.get(`https://openapi.etsy.com/v3/application/listings/${etsyId}?client_id=${process.env.ETSY_API_KEY}&includes=images`)
-//     .then(apiResults => {
-//         res.render('gifts/new', {result: apiResults.data})
-//     })
-//     .catch(error => {
-//         console.error
-//     })
-// })
-
 // SAME CODE AS ABOVE but figuring out how to add recipients
 router.get('/etsy/:etsyId', isLoggedIn, (req, res) => {
     let etsyId = req.params.etsyId
@@ -108,22 +90,6 @@ router.get('/etsy/:etsyId', isLoggedIn, (req, res) => {
     .catch(error => {
         console.error
     })
-
-    
-    
-    
-    // axios query
-    // axios.get(`https://openapi.etsy.com/v3/application/listings/${etsyId}?client_id=${process.env.ETSY_API_KEY}&includes=images`)
-    // .then(() => {
-    //     db.recipient.findAll()
-    //     console.log('found all recipients')
-    // })
-    // .then((apiResults, recipients) => {
-    //     res.render('gifts/new', {result: apiResults.data})
-    // })
-    // .catch(error => {
-    //     console.error
-    // })
 })
 
 module.exports = router
