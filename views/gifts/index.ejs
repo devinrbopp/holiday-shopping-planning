@@ -1,6 +1,7 @@
 <h1>Gifts</h1>
 <% gifts.forEach(g => { %>
     <h4><%= g.name %></h4>
+    <h6><%= g.firstName %> <%= g.lastName %></h6>
     <form action="/gifts/<%= g.id %>?_method=DELETE" method="POST">
         <input type="submit" value="Delete">
     </form>

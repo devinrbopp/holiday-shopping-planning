@@ -6,8 +6,13 @@ const axios = require('axios')
 
 // index gift display
 router.get('/', isLoggedIn, (req,res) => {
-    db.sequelize.query(`SELECT g.name FROM gifts g INNER JOIN recipients r ON g."recipientId"=r.id INNER JOIN users u ON r."userId"=u.id WHERE u.id=${req.user.dataValues.id}`)
+    db.sequelize.query(`SELECT g.name, r."firstName", r."lastName"
+    FROM gifts g 
+    INNER JOIN recipients r ON g."recipientId"=r.id 
+    INNER JOIN users u ON r."userId"=u.id 
+    WHERE u.id=${req.user.dataValues.id}`)
     .then( results => {
+        console.log('RESULTS HERE 🎁\n', results)
         res.render('gifts/index', {gifts: results[0]})
     })
     .catch( error => {
