@@ -1,8 +1,8 @@
 <h4><%= etsyData.title %></h4>
-<% //console.log('HERLLO') %>
-<% console.log('recipients array', recipients) %>
+<% console.log(etsyData) %>
 <form action="/gifts" method="POST">
     <input type="text" name="name" value="<%= etsyData.title %>" hidden>
+    <input type="text" name="etsyListingId" value="<%= etsyData.listing_id %>" hidden>
     <input type="text" name="store" value="Etsy" hidden>
     <label for="recipientId">Recipient</label>
     <select name="recipientId" id="recipientId">

@@ -6,7 +6,7 @@ const axios = require('axios')
 
 // index gift display
 router.get('/', isLoggedIn, (req,res) => {
-    db.sequelize.query(`SELECT g.id, g.name, r."firstName", r."lastName"
+    db.sequelize.query(`SELECT g.id, g."isPurchased", g.name, g."etsyListingId", r."firstName", r."lastName"
     FROM gifts g 
     INNER JOIN recipients r ON g."recipientId"=r.id 
     INNER JOIN users u ON r."userId"=u.id 
@@ -39,7 +39,8 @@ router.post('/', isLoggedIn, (req, res) => {
     name: req.body.name,
     store: req.body.store,
     isPurchased: 'false',
-    recipientId: req.body.recipientId
+    recipientId: req.body.recipientId,
+    etsyListingId: req.body.etsyListingId
     })
     .then( gift => {
         res.redirect('/gifts')
