@@ -1,10 +1,15 @@
 const express = require('express')
 const router = express.Router()
 const db = require('../models')
+const isLoggedIn = require('../middleware/isLoggedIn')
 const axios = require('axios')
 
 // index gift display
-router.get('/', (req,res) => {
+router.get('/', isLoggedIn, (req,res) => {
+    // db.user.findAll({
+        //     WHERE RECIPIENT ID BELONGS TO USERID OF CURRENTLY LOGGED IN USER, gonna need to use left join
+        //     SELECT g.name FROM gifts g INNER JOIN recipients r ON g."recipientId"=r.id INNER JOIN users u ON r."userId"=u.id WHERE u.id=1;
+        // })
     db.gift.findAll()
     .then( gifts => {
         res.render('gifts/index', {gifts})
@@ -15,7 +20,7 @@ router.get('/', (req,res) => {
 })
 
 // search
-router.get('/results', (req, res) => {
+router.get('/results', isLoggedIn, (req, res) => {
     // pull in search query from form HERE and assign to variable
     let keyword = 'cats'
 
@@ -31,7 +36,7 @@ router.get('/results', (req, res) => {
 })
 
 // POST add a gift
-router.post('/', (req, res) => {
+router.post('/', isLoggedIn, (req, res) => {
     
     console.log('req.body!!!!!!!!!!!', req.body)
     db.gift.create({
@@ -49,7 +54,7 @@ router.post('/', (req, res) => {
 })
 
 // DELETE a gift
-router.delete('/:id', (req, res) => {
+router.delete('/:id', isLoggedIn, (req, res) => {
     db.gift.destroy({where: {id: req.params.id}})
     .then( deletedGift => {
         res.redirect('/gifts')
@@ -60,7 +65,7 @@ router.delete('/:id', (req, res) => {
 })
 
 // PUT to mark a gift as purchased
-router.put('/:id', (req, res) => {
+router.put('/:id', isLoggedIn, (req, res) => {
     db.gift.update({
         isPurchased: 'true'
     }, {
@@ -88,11 +93,11 @@ router.put('/:id', (req, res) => {
 // })
 
 // SAME CODE AS ABOVE but figuring out how to add recipients
-router.get('/etsy/:etsyId', (req, res) => {
+router.get('/etsy/:etsyId', isLoggedIn, (req, res) => {
     let etsyId = req.params.etsyId
     console.log('etsy id delcared:', etsyId)
     const promise1 = axios.get(`https://openapi.etsy.com/v3/application/listings/${etsyId}?client_id=${process.env.ETSY_API_KEY}&includes=images`)
-    const promise2 = db.recipient.findAll()
+    const promise2 = db.recipient.findAll({where: {userId: req.user.dataValues.id}})
     
     Promise.all([promise1, promise2])
     .then( values => {
