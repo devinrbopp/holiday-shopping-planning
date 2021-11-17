@@ -1,4 +1,10 @@
 <h1>Gifts</h1>
 <% gifts.forEach(g => { %>
     <h4><%= g.name %></h4>
+    <form action="/gifts/<%= g.id %>?_method=DELETE" method="POST">
+        <input type="submit" value="Delete">
+    </form>
+    <form action="/gifts/<%= g.id %>?_method=PUT" method="POST">
+        <input type="submit" value="Mark as Purchased">
+    </form>
 <% }) %>

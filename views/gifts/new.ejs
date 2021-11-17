@@ -1,6 +1,15 @@
-<h4><%= result.title %></h4>
+<h4><%= etsyData.title %></h4>
+<% //console.log('HERLLO') %>
+<% console.log('recipients array', recipients) %>
 <form action="/gifts" method="POST">
-    <input type="text" name="name" value="<%= result.title %>" hidden>
+    <input type="text" name="name" value="<%= etsyData.title %>" hidden>
     <input type="text" name="store" value="Etsy" hidden>
+    <label for="recipientId">Recipient</label>
+    <select name="recipientId" id="recipientId">
+        <option disabled selected>Choose...</option>
+        <% recipients.forEach(r => { %>
+            <option value="<%= r.dataValues.id %>"><%= r.dataValues.firstName %> <%= r.dataValues.lastName %></option>
+        <% }) %>
+    </select>
     <input type="submit" value="Add to Gifts">
 </form>

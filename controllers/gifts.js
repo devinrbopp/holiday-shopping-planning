@@ -32,9 +32,13 @@ router.get('/results', (req, res) => {
 
 // POST add a gift
 router.post('/', (req, res) => {
+    
+    console.log('req.body!!!!!!!!!!!', req.body)
     db.gift.create({
         name: req.body.name,
-        store: req.body.store
+        store: req.body.store,
+        isPurchased: 'false',
+        recipientId: req.body.recipientId
     })
     .then( gift => {
         res.redirect('/gifts')
@@ -44,18 +48,76 @@ router.post('/', (req, res) => {
     })
 })
 
-// show a etsy product, and have the option to add it to a recipient
-router.get('/:etsyId', (req, res) => {
-    let etsyId = req.params.etsyId
-    // axios query
-    axios.get(`https://openapi.etsy.com/v3/application/listings/${etsyId}?client_id=${process.env.ETSY_API_KEY}&includes=images`)
-    .then(apiResults => {
-        res.render('gifts/new', {result: apiResults.data})
+// DELETE a gift
+router.delete('/:id', (req, res) => {
+    db.gift.destroy({where: {id: req.params.id}})
+    .then( deletedGift => {
+        res.redirect('/gifts')
     })
     .catch(error => {
         console.error
     })
 })
 
+// PUT to mark a gift as purchased
+router.put('/:id', (req, res) => {
+    db.gift.update({
+        isPurchased: 'true'
+    }, {
+        where: {id: req.params.id}
+    })
+    .then( result => {
+        res.redirect('/gifts')
+    })
+    .catch(error => {
+        console.error
+    })
+})
+
+// // show a etsy product, and have the option to add it to a recipient
+// router.get('/etsy/:etsyId', (req, res) => {
+//     let etsyId = req.params.etsyId
+//     // axios query
+//     axios.get(`https://openapi.etsy.com/v3/application/listings/${etsyId}?client_id=${process.env.ETSY_API_KEY}&includes=images`)
+//     .then(apiResults => {
+//         res.render('gifts/new', {result: apiResults.data})
+//     })
+//     .catch(error => {
+//         console.error
+//     })
+// })
+
+// SAME CODE AS ABOVE but figuring out how to add recipients
+router.get('/etsy/:etsyId', (req, res) => {
+    let etsyId = req.params.etsyId
+    console.log('etsy id delcared:', etsyId)
+    const promise1 = axios.get(`https://openapi.etsy.com/v3/application/listings/${etsyId}?client_id=${process.env.ETSY_API_KEY}&includes=images`)
+    const promise2 = db.recipient.findAll()
+    
+    Promise.all([promise1, promise2])
+    .then( values => {
+        console.log('PROMISE RESULTS!!!!!!!!!!!!', values)
+        res.render('gifts/new', { etsyData: values[0].data, recipients: values[1] })
+    })
+    .catch(error => {
+        console.error
+    })
+
+    
+    
+    
+    // axios query
+    // axios.get(`https://openapi.etsy.com/v3/application/listings/${etsyId}?client_id=${process.env.ETSY_API_KEY}&includes=images`)
+    // .then(() => {
+    //     db.recipient.findAll()
+    //     console.log('found all recipients')
+    // })
+    // .then((apiResults, recipients) => {
+    //     res.render('gifts/new', {result: apiResults.data})
+    // })
+    // .catch(error => {
+    //     console.error
+    // })
+})
 
 module.exports = router
