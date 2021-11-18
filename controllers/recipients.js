@@ -46,11 +46,26 @@ router.get('/:id', (req, res) => {
 // POST create new recipient form
 router.post('/', isLoggedIn, (req, res) => {
     let interests = []
-    if (req.body.interest1 === 'on') {
-        interests.push('interest 1')
+    if (req.body.cooking === 'on') {
+        interests.push('cooking')
     }
-    if (req.body.interest2 === 'on') {
-        interests.push('interest 2')
+    if (req.body.books === 'on') {
+        interests.push('books')
+    }
+    if (req.body.music === 'on') {
+        interests.push('music')
+    }
+    if (req.body.coding === 'on') {
+        interests.push('coding')
+    }
+    if (req.body.art === 'on') {
+        interests.push('art')
+    }
+    if (req.body.travel === 'on') {
+        interests.push('travel')
+    }
+    if (req.body.woodworking === 'on') {
+        interests.push('woodworking')
     }
     let interestsStr = interests.join(',')
     db.recipient.create({

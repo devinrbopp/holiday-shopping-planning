@@ -19,12 +19,12 @@
     </select>
 
     <input type="integer" name="userId" value="<%= currentUser.id %>" hidden>
-    <label>
-        <input type="checkbox" class="filled-in" name="interest1"><span>Interest 1</span>
-    </label>
-    <label>
-        <input type="checkbox" class="filled-in" name="interest2"><span>Interest 2</span>
-    </label>
-    <br>
-    <input type="submit" value="Add Recipient">
+
+    <% const interests = ['cooking', 'books', 'music', 'coding', 'art', 'travel', 'woodworking'] %>
+    <% interests.forEach( i => { %>
+        <label>
+            <input type="checkbox" class="filled-in" name="<%= i %>"><span><%= i %></span>
+        </label>
+    <% }) %>
+    <input type="submit" class="teal btn" value="Add Recipient">
 </form>

@@ -4,8 +4,14 @@
         <h3>Find new gifts on Etsy:</h3>
         <form action="/gifts/results">
             <label for="search">Keywords</label>
-            <input type="text" id="search" name="search">
-            <input type="submit" class="btn blue" value="Search">
+            <div class="row">
+                <div class="col s8">
+                    <input type="text" id="search" name="search">
+                </div>
+                <div class="col s4">
+                    <input type="submit" class="btn blue" value="Search">
+                </div>
+            </div>
         </form>
     </div>
 </div>
@@ -16,7 +22,7 @@
             <div class="card medium">
                 <div class="card-content">
                     <h4><a href=<%=`https://www.etsy.com/listing/${g.etsyListingId}`%> target="_blank"><%= g.name %></a></h4>
-                    <h6><%= g.firstName %> <%= g.lastName %></h6>
+                    <p><%= g.firstName %> <%= g.lastName %></p>
                 </div>
                 <div class="card-action">
                     <div class="row">
@@ -33,13 +39,10 @@
                             <form action="/gifts/<%= g.id %>?_method=DELETE" method="POST">
                                 <input class="btn red" type="submit" value="Delete">
                             </form>
-    
                         </div>
                     </div> 
                 </div>
             </div>
         </div>
-
-
     <% }) %>
 </div>
