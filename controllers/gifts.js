@@ -26,7 +26,7 @@ router.get('/results', isLoggedIn, (req, res) => {
     // axios request
     axios.get(`https://openapi.etsy.com/v3/application/listings/active?client_id=${process.env.ETSY_API_KEY}&keywords=${keyword}`)
     .then(apiResults => {
-        res.render('gifts/results', {results: apiResults.data.results})
+        res.render('gifts/results', {results: apiResults.data.results, keyword})
     })
     .catch(error => {
         console.error

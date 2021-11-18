@@ -21,10 +21,14 @@
     <input type="integer" name="userId" value="<%= currentUser.id %>" hidden>
 
     <% const interests = ['cooking', 'books', 'music', 'coding', 'art', 'travel', 'woodworking'] %>
-    <% interests.forEach( i => { %>
-        <label>
-            <input type="checkbox" class="filled-in" name="<%= i %>"><span><%= i %></span>
-        </label>
-    <% }) %>
+    <div class="row">
+        <% interests.forEach( i => { %>
+            <div class="col s3">
+                <label>
+                    <input type="checkbox" class="filled-in" name="<%= i %>" /><span><%= i %></span>
+                </label>
+            </div>
+        <% }) %>
+    </div>
     <input type="submit" class="teal btn" value="Add Recipient">
 </form>
