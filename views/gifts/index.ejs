@@ -21,7 +21,7 @@
         <div class="col l6 m12 s12">
             <div class="card medium">
                 <div class="card-content">
-                    <h4><a href=<%=`https://www.etsy.com/listing/${g.etsyListingId}`%> target="_blank"><%= g.name %></a></h4>
+                    <h4><a href=<%=`https://www.etsy.com/listing/${g.etsyListingId}`%> target="_blank"><%= g.name.replaceAll(`&quot;`, `"`).replaceAll(`&#39;`, `'`)  %></a></h4>
                     <p><%= g.firstName %> <%= g.lastName %></p>
                 </div>
                 <div class="card-action">
@@ -36,12 +36,23 @@
                             <% } %>
                         </div> 
                         <div class="col right">
-                            <form action="/gifts/<%= g.id %>?_method=DELETE" method="POST">
-                                <input class="btn red" type="submit" value="Delete">
-                            </form>
+                            <a class="btn red modal-trigger" href="#modal<%= g.id %>">Delete</a>
                         </div>
                     </div> 
                 </div>
+            </div>
+        </div>
+        <% // this is all reused from the user section!!!! %>
+        <div id="modal<%= g.id %>" class="modal">
+            <div class="modal-content">
+                <h4>Are you sure you want to delete this gift?</h4>
+                <p><strong>This can't be undone!</strong></p>
+            </div>
+            <div class="modal-footer">
+                <form action="/gifts/<%= g.id %>?_method=DELETE" method="POST">
+                    <a href="#!" class="modal-close btn-flat">Never mind</a>
+                    <button class="modal-close red btn" type="submit">Delete</button>
+                </form>
             </div>
         </div>
     <% }) %>
