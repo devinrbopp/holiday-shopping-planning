@@ -11,11 +11,21 @@
     </div>
 </form>
 <div class="row">
+    <div class="col s12">
+        <small>All prices USD unless otherwise noted.</small>
+    </div>
+</div>
+<div class="row">
     <% results.forEach(r => { %>
         <div class="col l6 m12 s12">
             <div class="card blue-grey medium">
                 <div class="card-content white-text">
-                    <span class="card-title"><%= r.title.replace(/&/g, "&amp;").replace(/>/g, "&gt;").replace(/</g, "&lt;").replace(/"/g, "&quot;") %></span>
+                    <span class="card-title"><%= r.title.replaceAll(`&quot;`, `"`).replaceAll(`&#39;`, `'`) %></span>
+                    <% if (r.price.currency_code != "USD") { %>
+                        <p><%= (r.price.amount / r.price.divisor).toFixed(2) %>+ <%= r.price.currency_code %></p>
+                    <% } else { %>
+                        <p>$<%= (r.price.amount / r.price.divisor).toFixed(2) %>+</p>
+                    <% } %>
                 </div>
                 <div class="card-action">
                     <a href="<%= r.url %>" target="_blank">View on Etsy</a>
