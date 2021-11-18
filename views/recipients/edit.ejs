@@ -1,0 +1,14 @@
+<div class="row">
+    <div class="col s12">
+        <h1>Edit <%= recipient.firstName %> <%= recipient.lastName %></h1>
+
+        <form action="/recipients/<%= recipient.id %>?_method=PUT" method="POST">
+            <label for="firstName">First Name</label>
+            <input type="text" name="firstName" id="firstName" value="<%= recipient.firstName %>">
+            <label for="lastName">Last Name</label>
+            <input type="text" name="lastName" id="lastName" value="<%= recipient.lastName %>">
+            <input type="submit" class="btn teal">
+        </form>
+
+    </div>
+</div>

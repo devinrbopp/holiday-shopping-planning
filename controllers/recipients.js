@@ -8,7 +8,7 @@ const isLoggedIn = require('../middleware/isLoggedIn')
 router.get('/', isLoggedIn, (req,res) => {
     db.recipient.findAll({where: {userId: req.user.dataValues.id}})
     .then((recipients) => {
-        res.render('recipients/index', {recipients: recipients })
+        res.render('recipients/index', {recipients: recipients})
     }).catch(error => {
         console.error
     })
@@ -27,6 +27,33 @@ router.delete('/:id', (req, res) => {
         res.redirect('/recipients')
     })
     .catch(error=> {
+        console.error
+    })
+})
+
+// GET edit form
+router.get('/edit/:id', isLoggedIn, (req,res) => {
+    db.recipient.findOne({where: {id: req.params.id}})
+    .then( recipient => {
+        res.render('recipients/edit', {recipient})
+    })
+    .catch(error => {
+        console.error
+    })
+})
+
+// PUT edit recipient form
+router.put('/:id', isLoggedIn, (req, res) => {
+    db.recipient.update({
+        firstName: req.body.firstName,
+        lastName: req.body.lastName
+    }, {
+        where: {id: req.params.id}
+    })
+    .then(result => {
+        res.redirect('/recipients')
+    })
+    .catch(error => {
         console.error
     })
 })

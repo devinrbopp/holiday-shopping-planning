@@ -29,6 +29,7 @@
                         </ul>
                     </div>
                     <div class="card-action">
+                        <a class="btn blue" href="/recipients/edit/<%= r.id %>">Edit</a>
                         <a class="btn red modal-trigger" href="#modal<%= r.id %>">Delete</a>
                     </div>
                 </div>
@@ -42,8 +43,8 @@
                 </div>
                 <div class="modal-footer">
                     <form action="/recipients/<%= r.id %>?_method=DELETE" method="POST">
-                        <button class="modal-close btn-flat" type="submit">Delete</button>
-                        <a href="#!" class="modal-close blue btn">Never mind</a>
+                        <a href="#!" class="modal-close btn-flat">Never mind</a>
+                        <button class="modal-close red btn" type="submit">Delete</button>
                     </form>
                 </div>
             </div>
