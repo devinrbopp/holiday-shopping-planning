@@ -3,7 +3,7 @@
 <form action="/gifts/results">
     <label for="search">Keywords</label>
     <input type="text" id="search" name="search">
-    <input type="submit" value="Search">
+    <input type="submit" class="btn blue" value="Search">
 </form>
 
 <div class="row">
@@ -16,31 +16,22 @@
                 </div>
                 <div class="card-action">
                     <div class="row">
-
                         <div class="col">
                             <% if (g.isPurchased == false) { %>
                                 <form action="/gifts/<%= g.id %>?_method=PUT" method="POST">
-                                    <input class="btn" type="submit" value="Mark as Purchased">
+                                    <input class="btn" type="submit" value="Bought it!">
                                 </form>
                             <% } else { %>
                                 <h6>Purchased!</h6>
                             <% } %>
-                        </div>
-                        
+                        </div> 
                         <div class="col right">
                             <form action="/gifts/<%= g.id %>?_method=DELETE" method="POST">
                                 <input class="btn red" type="submit" value="Delete">
                             </form>
     
                         </div>
-                    </div>
-
-
-
-
-
-
-
+                    </div> 
                 </div>
             </div>
         </div>

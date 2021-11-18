@@ -19,10 +19,11 @@
                   <li><a href="/auth/signup">Signup</a></li>
                   <li><a href="/auth/login">Login</a></li>
                 <% } else { %>
-                  <li><a href="/auth/logout">Logout</a></li>
+                  <li><a href="/">Home</a></li>
                   <li><a href="/profile"><%= currentUser.name %>'s Profile</a></li>
                   <li><a href="/recipients">Recipients</a></li>
                   <li><a href="/gifts">Gifts</a></li>
+                  <li><a href="/auth/logout">Logout</a></li>
                 <% } %>
               </ul>
             </div>

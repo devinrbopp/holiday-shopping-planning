@@ -18,7 +18,7 @@ router.get('/', isLoggedIn, (req,res) => {
         console.error
     })
 })
-
+ 
 // search results display
 router.get('/results', isLoggedIn, (req, res) => {
     // pull in search query from form HERE and assign to variable
@@ -85,7 +85,7 @@ router.get('/etsy/:etsyId', isLoggedIn, (req, res) => {
     
     Promise.all([promise1, promise2])
     .then( values => {
-        console.log('PROMISE RESULTS!!!!!!!!!!!!', values)
+        console.log('PROMISE RESULTS!', values)
         res.render('gifts/new', { etsyData: values[0].data, recipients: values[1] })
     })
     .catch(error => {
