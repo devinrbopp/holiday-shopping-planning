@@ -18,9 +18,12 @@
 <div class="row">
     <% results.forEach(r => { %>
         <div class="col l6 m12 s12">
-            <div class="card blue-grey small">
-                <div class="card-content white-text">
-                    <p class="flow-text"><%= r.title.replaceAll(`&quot;`, `"`).replaceAll(`&#39;`, `'`) %></p>
+            <div class="card large">
+                <div class="card-image">
+                    <img src="<%= r.images[0].url_570xN %>" alt="Product image">
+                </div>
+                <div class="card-content">
+                    <p><%= r.title.replaceAll(`&quot;`, `"`).replaceAll(`&#39;`, `'`) %></p>
                     <% if (r.price.currency_code != "USD") { %>
                         <p><%= (r.price.amount / r.price.divisor).toFixed(2) %>+ <%= r.price.currency_code %></p>
                     <% } else { %>
