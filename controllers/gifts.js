@@ -20,13 +20,41 @@ router.get('/', isLoggedIn, (req,res) => {
 })
  
 // search results display
+// router.get('/results', isLoggedIn, (req, res) => {
+//     // pull in search query from form HERE and assign to variable
+//     let keyword = req.query.search
+//     // axios request
+//     axios.get(`https://openapi.etsy.com/v3/application/listings/active?client_id=${process.env.ETSY_API_KEY}&keywords=${keyword}`)
+//     .then(apiResults => {
+//         res.render('gifts/results', {results: apiResults.data.results, keyword})
+//     })
+//     .catch(error => {
+//         console.error
+//     })
+// })
+
+// new search results route that includes images?
 router.get('/results', isLoggedIn, (req, res) => {
     // pull in search query from form HERE and assign to variable
     let keyword = req.query.search
     // axios request
     axios.get(`https://openapi.etsy.com/v3/application/listings/active?client_id=${process.env.ETSY_API_KEY}&keywords=${keyword}`)
     .then(apiResults => {
-        res.render('gifts/results', {results: apiResults.data.results, keyword})
+        const searchResults = apiResults.data.results
+        const listingIds = []
+        console.log('SEARCH RESULTS🍓\n', searchResults)
+        // forEach through searchResults and push the listing_id to listingIds
+        searchResults.forEach( result => {
+            listingIds.push(result.listing_id)
+        })
+        axios.get(`https://openapi.etsy.com/v3/application/listings/batch?client_id=${process.env.ETSY_API_KEY}&listing_ids=${listingIds.join(',')}&includes=images`)
+        .then(batchResults => {
+            res.render('gifts/results', {results: batchResults.data.results, keyword})
+
+        })
+        .catch(error => {
+            console.error
+        })
     })
     .catch(error => {
         console.error
