@@ -18,20 +18,6 @@ router.get('/', isLoggedIn, (req,res) => {
         console.error
     })
 })
- 
-// search results display
-// router.get('/results', isLoggedIn, (req, res) => {
-//     // pull in search query from form HERE and assign to variable
-//     let keyword = req.query.search
-//     // axios request
-//     axios.get(`https://openapi.etsy.com/v3/application/listings/active?client_id=${process.env.ETSY_API_KEY}&keywords=${keyword}`)
-//     .then(apiResults => {
-//         res.render('gifts/results', {results: apiResults.data.results, keyword})
-//     })
-//     .catch(error => {
-//         console.error
-//     })
-// })
 
 // new search results route that includes images?
 router.get('/results', isLoggedIn, (req, res) => {

@@ -1,15 +1,19 @@
-<h1>Search</h1>
-<form action="/gifts/results">
-    <label for="search">Keywords</label>
-    <div class="row">
-        <div class="col s8">
-            <input type="text" id="search" name="search" value="<%= keyword %>">
-        </div>
-        <div class="col s4">
-            <input type="submit" class="btn blue" value="Search">
-        </div>
+<div class="row">
+    <div class="col s12">
+        <h4>Search results for "<%= keyword %>"</h4>
+        <form action="/gifts/results">
+            <label for="search">Keywords</label>
+            <div class="row">
+                <div class="col s8">
+                    <input type="text" id="search" name="search" value="<%= keyword %>">
+                </div>
+                <div class="col s4">
+                    <input type="submit" class="btn blue" value="Search">
+                </div>
+            </div>
+        </form>
     </div>
-</form>
+</div>
 <div class="row">
     <div class="col s12">
         <small>All prices USD unless otherwise noted.</small>
