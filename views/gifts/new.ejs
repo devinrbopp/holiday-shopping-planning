@@ -1,15 +1,22 @@
-<h4><%= etsyData.title %></h4>
-<% console.log(etsyData) %>
-<form action="/gifts" method="POST">
-    <input type="text" name="name" value="<%= etsyData.title %>" hidden>
-    <input type="text" name="etsyListingId" value="<%= etsyData.listing_id %>" hidden>
-    <input type="text" name="store" value="Etsy" hidden>
-    <label for="recipientId">Recipient</label>
-    <select name="recipientId" id="recipientId">
-        <option disabled selected>Choose...</option>
-        <% recipients.forEach(r => { %>
-            <option value="<%= r.dataValues.id %>"><%= r.dataValues.firstName %> <%= r.dataValues.lastName %></option>
-        <% }) %>
-    </select>
-    <input type="submit" value="Add to Gifts">
-</form>
+<div class="row">
+    <div class="col s12">
+        <h4><%= etsyData.title %></h4>
+        <form action="/gifts" method="POST">
+            <input type="text" name="name" value="<%= etsyData.title %>" hidden>
+            <input type="text" name="etsyListingId" value="<%= etsyData.listing_id %>" hidden>
+            <input type="text" name="store" value="Etsy" hidden>
+            <div class="row">
+                <div class="col s12 m6">
+                    <label for="recipientId">Recipient</label>
+                    <select name="recipientId" id="recipientId">
+                        <option disabled selected>Choose...</option>
+                        <% recipients.forEach(r => { %>
+                            <option value="<%= r.dataValues.id %>"><%= r.dataValues.firstName %> <%= r.dataValues.lastName %></option>
+                        <% }) %>
+                    </select>
+                </div>
+            </div>
+            <input class='btn' type="submit" value="Add to Gifts">
+        </form>
+    </div>
+</div>
