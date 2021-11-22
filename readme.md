@@ -1,6 +1,8 @@
 # Present-ly: A Holiday Shopping Planner
 I'm not the best gift-giver, especially when I am shopping for more than one person. This application will allow users to track who they are shopping for, what their interests are, and any potential gift ideas before they are ready to make purchases.
 
+Users log in, create "recipients" for whom they plan to buy gifts, then assign gifts ideas to recipients via in-app Etsy searches. Gifts can then be marked as purchased.
+
 ## Stack
 Present-ly is a full-stack REST API built using HTML5, CSS, JavaScript, Express, Postgres, Node, SQL, and Materialize CSS.
 
