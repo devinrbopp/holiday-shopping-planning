@@ -21,7 +21,7 @@
         <div class="col l6 m12 s12">
             <div class="card medium">
                 <div class="card-content">
-                    <h4><a href=<%=`https://www.etsy.com/listing/${g.etsyListingId}`%> target="_blank"><%= g.name.replaceAll(`&quot;`, `"`).replaceAll(`&#39;`, `'`)  %></a></h4>
+                    <h4><a href=<%=`https://www.etsy.com/listing/${g.etsyListingId}`%> target="_blank"><%= g.name.replace(/&quot;/g, `"`).replace(/&#39;/g, `'`)  %></a></h4>
                     <p><%= g.firstName %> <%= g.lastName %></p>
                 </div>
                 <div class="card-action">
