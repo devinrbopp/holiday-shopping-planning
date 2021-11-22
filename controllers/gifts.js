@@ -19,7 +19,7 @@ router.get('/', isLoggedIn, (req,res) => {
     })
 })
 
-// new search results route that includes images?
+// GET new search results route that includes images
 router.get('/results', isLoggedIn, (req, res) => {
     // pull in search query from form HERE and assign to variable
     let keyword = req.query.search
@@ -90,7 +90,7 @@ router.put('/:id', isLoggedIn, (req, res) => {
     })
 })
 
-// SAME CODE AS ABOVE but figuring out how to add recipients
+// GET add gift form
 router.get('/etsy/:etsyId', isLoggedIn, (req, res) => {
     let etsyId = req.params.etsyId
     console.log('etsy id delcared:', etsyId)

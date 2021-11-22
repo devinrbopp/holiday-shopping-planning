@@ -1,13 +1,24 @@
 <div class="row">
     <div class="col s12">
         <h1>Edit <%= recipient.firstName %> <%= recipient.lastName %></h1>
+        <div class="row">
+            <form action="/recipients/<%= recipient.id %>?_method=PUT" method="POST">
+            <div class="col s12 m6">
+                <label for="firstName">First Name</label>
+                <input type="text" name="firstName" id="firstName" value="<%= recipient.firstName %>">
 
-        <form action="/recipients/<%= recipient.id %>?_method=PUT" method="POST">
-            <label for="firstName">First Name</label>
-            <input type="text" name="firstName" id="firstName" value="<%= recipient.firstName %>">
-            <label for="lastName">Last Name</label>
-            <input type="text" name="lastName" id="lastName" value="<%= recipient.lastName %>">
-            <input type="submit" class="btn teal">
+            </div>
+            <div class="col s12 m6">
+                <label for="lastName">Last Name</label>
+                <input type="text" name="lastName" id="lastName" value="<%= recipient.lastName %>">
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <input type="submit" class="btn teal">
+            </div>
+        </div>
         </form>
 
     </div>
