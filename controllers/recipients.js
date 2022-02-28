@@ -10,7 +10,7 @@ router.get('/', isLoggedIn, (req,res) => {
     .then((recipients) => {
         res.render('recipients/index', {recipients: recipients})
     }).catch(error => {
-        console.error
+        console.error(error)
     })
     // res.render('recipients/recipients')
 })
@@ -27,7 +27,7 @@ router.delete('/:id', (req, res) => {
         res.redirect('/recipients')
     })
     .catch(error=> {
-        console.error
+        console.error(error)
     })
 })
 
@@ -38,7 +38,7 @@ router.get('/edit/:id', isLoggedIn, (req,res) => {
         res.render('recipients/edit', {recipient})
     })
     .catch(error => {
-        console.error
+        console.error(error)
     })
 })
 
@@ -54,7 +54,7 @@ router.put('/:id', isLoggedIn, (req, res) => {
         res.redirect('/recipients')
     })
     .catch(error => {
-        console.error
+        console.error(error)
     })
 })
 
@@ -66,7 +66,7 @@ router.get('/:id', (req, res) => {
         res.render('recipients/show', {recipient: recipient})
     })
     .catch(error => {
-        console.error
+        console.error(error)
     })
 })
 
@@ -106,7 +106,7 @@ router.post('/', isLoggedIn, (req, res) => {
         res.redirect('/recipients')
     })
     .catch((error) => (
-        console.error
+        console.error(error)
     ))
 })
 

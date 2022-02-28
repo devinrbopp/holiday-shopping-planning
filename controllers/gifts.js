@@ -15,7 +15,7 @@ router.get('/', isLoggedIn, (req,res) => {
         res.render('gifts/index', {gifts: results[0]})
     })
     .catch( error => {
-        console.error
+        console.error(error)
     })
 })
 
@@ -39,11 +39,11 @@ router.get('/results', isLoggedIn, (req, res) => {
 
         })
         .catch(error => {
-            console.error
+            console.error(error)
         })
     })
     .catch(error => {
-        console.error
+        console.error(error)
     })
 })
 
@@ -60,7 +60,7 @@ router.post('/', isLoggedIn, (req, res) => {
         res.redirect('/gifts')
     })
     .catch( error => {
-        console.error
+        console.error(error)
     })
 })
 
@@ -71,7 +71,7 @@ router.delete('/:id', isLoggedIn, (req, res) => {
         res.redirect('/gifts')
     })
     .catch(error => {
-        console.error
+        console.error(error)
     })
 })
 
@@ -86,7 +86,7 @@ router.put('/:id', isLoggedIn, (req, res) => {
         res.redirect('/gifts')
     })
     .catch(error => {
-        console.error
+        console.error(error)
     })
 })
 
@@ -103,7 +103,7 @@ router.get('/etsy/:etsyId', isLoggedIn, (req, res) => {
         res.render('gifts/new', { etsyData: values[0].data, recipients: values[1] })
     })
     .catch(error => {
-        console.error
+        console.error(error)
     })
 })
 
